@@ -45,9 +45,6 @@ extracted_ds[, 2] <- activity[extracted_ds$activity, 2]
 
 
 
-library(dplyr)
-extracted_ds <- arrange(extracted_ds, subject)
-
 ## Splitting the dataframe according to unique subject, activity pair
 split_ds <- split(extracted_ds, f = list(extracted_ds$subject, extracted_ds$activity))
 
@@ -66,6 +63,9 @@ for (df in split_ds) {
 
 colnames(average_ds) <- colnames(extracted_ds)
 average_ds[, 1] <- as.numeric(average_ds[, 1])
+
+library(dplyr)
 average_ds <- arrange(average_ds, subject)
 
+## Saving the tidy data in a text file
 write.table(average_ds, file = "tidydata.txt", row.names = FALSE)
